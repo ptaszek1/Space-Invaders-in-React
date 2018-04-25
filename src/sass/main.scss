@@ -1,0 +1,147 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive, sans-serif;
+}
+#board {
+    width: 60%;
+    min-height: 80%;
+    background-color: black;
+    color: white;
+    position: absolute;
+    left: 20%;
+}
+.enemy {
+    text-align: center;
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+.score {
+    display: inline-block;
+}
+
+.score li {
+    display: inline-block;
+    padding: 25px;
+}
+
+.first-line {
+    background: url('../images/spaceInvadersSprites.png') no-repeat -7px -225px;
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    margin: 0 7px;
+    animation: firstUfo  1s 0s infinite steps(2);
+
+}
+
+@keyframes firstUfo {
+    100% {
+        background-position: -72px -225px;
+    }
+}
+
+.second-line {
+     background: url('../images/spaceInvadersSprites.png') no-repeat -74px -225px;
+     width: 22px;
+     height: 16px;
+     display: inline-block;
+     margin: 0 4px;
+     animation: secondUfo  1s 0s infinite steps(2);
+ }
+
+@keyframes secondUfo {
+    100% {
+        background-position: -141px -225px;
+    }
+}
+
+.third-line {
+    background: url('../images/spaceInvadersSprites.png') no-repeat -107px -225px;
+    width: 22px;
+    height: 16px;
+    display: inline-block;
+    margin: 0 4px;
+    animation: thirdUfo  1s 0s infinite steps(2);
+}
+
+@keyframes thirdUfo {
+    100% {
+        background-position: -40px -225px;
+    }
+}
+
+.four-line {
+    background: url('../images/spaceInvadersSprites.png') no-repeat -147px -226px;
+    width: 24px;
+    height: 16px;
+    display: inline-block;
+    margin: 0 3px;
+    animation: fourthUfo  1s 0s infinite steps(2);
+}
+
+@keyframes fourthUfo {
+    100% {
+        background-position: -210px -225px;
+    }
+}
+
+.fifth-line {
+    background: url('../images/spaceInvadersSprites.png') no-repeat -179px -226px;
+    width: 24px;
+    height: 16px;
+    display: inline-block;
+    margin: 0 3px;
+    animation: fifthUfo  1s 0s infinite steps(2);
+}
+
+@keyframes fifthUfo {
+    100% {
+        background-position: -112px -225px;
+    }
+}
+
+
+
+
+
+
+
+.blocks {
+    text-align: center;
+}
+.block-shots {
+    background: url('../images/spaceInvadersSprites.png') no-repeat -316px -213px;
+    width: 44px;
+    height: 32px;
+    display: inline-block;
+    margin: 0 25px;
+}
+
+
+.player {
+    text-align: center;
+    padding: 10px;
+    //border-bottom: 2px solid #01FC00;
+}
+
+.player-move {
+    background: url('../images/spaceInvadersSprites.png') no-repeat -277px -228px;
+    width: 26px;
+    height: 16px;
+    margin-left: 250px;
+}
+.lifes {
+    padding: 25px;
+    width: 100%;
+    border-top: 2px solid #01FC00;
+    margin-top: 80px;
+    float: left;
+}
+.lifes-count {
+    background: url('../images/spaceInvadersSprites.png') no-repeat -277px -228px;
+    width: 26px;
+    height: 16px;
+    display: inline-block;
+    margin: 0 20px;
+}
