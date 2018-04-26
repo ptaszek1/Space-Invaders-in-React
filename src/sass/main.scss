@@ -13,8 +13,11 @@ body {
 }
 .enemy {
     text-align: center;
-    margin-top: 60px;
-    margin-bottom: 80px;
+    top: 60px;
+    bottom: 80px;
+    position: absolute;
+    margin-left: 300px;
+    margin-top: 50px;
 }
 .score {
     display: inline-block;
@@ -27,7 +30,7 @@ body {
 
 .first-line {
     background: url('../images/spaceInvadersSprites.png') no-repeat -7px -225px;
-    width: 16px;
+    width: 24px;
     height: 16px;
     display: inline-block;
     margin: 0 7px;
@@ -95,6 +98,14 @@ body {
     animation: fifthUfo  1s 0s infinite steps(2);
 }
 
+.fifthLine {
+    width: 24px;
+    height: 16px;
+    display: inline-block;
+
+    margin: 0 3px;
+}
+
 @keyframes fifthUfo {
     100% {
         background-position: -112px -225px;
@@ -109,33 +120,34 @@ body {
 
 .blocks {
     text-align: center;
+    margin-top: 150px;
 }
 .block-shots {
     background: url('../images/spaceInvadersSprites.png') no-repeat -316px -213px;
     width: 44px;
     height: 32px;
     display: inline-block;
-    margin: 0 25px;
+    margin: 0 25px ;
 }
 
 
 .player {
-    text-align: center;
-    padding: 10px;
-    //border-bottom: 2px solid #01FC00;
+    position:relative;
+    margin-top: 40px;
 }
 
 .player-move {
     background: url('../images/spaceInvadersSprites.png') no-repeat -277px -228px;
     width: 26px;
     height: 16px;
-    margin-left: 250px;
+    display:inline-block;
+    //margin-left: 250px;
 }
 .lifes {
     padding: 25px;
-    width: 100%;
+    width: 95%;
     border-top: 2px solid #01FC00;
-    margin-top: 80px;
+    margin-top: 150px;
     float: left;
 }
 .lifes-count {
