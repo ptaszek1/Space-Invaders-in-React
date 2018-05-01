@@ -1,4 +1,5 @@
 import React from 'react';
+import {Player} from './player.jsx'
 
 class FirstLine extends React.Component {
     render() {
@@ -79,36 +80,6 @@ class Blocks extends React.Component {
     }
 }
 
-
-class Player extends React.Component {
-
-    render() {
-        const stylesFire = ({
-            width: '2px',
-            height: '10px',
-            backgroundColor: 'white',
-            left: (~~this.props.marginPlayer2 + 11) + 'px',
-            bottom: this.props.shoot + 'px',
-            position: 'absolute'
-        });
-
-
-        const shootFire = (<div className="fire" style={stylesFire}></div>);
-
-        const stylesPlayer = ({
-            left: this.props.marginPlayer2,
-            margin: '0px 0',
-            position: 'relative'
-        });
-
-
-        return <div className="player" >
-            <div className="player-move" style={stylesPlayer}></div>
-            {shootFire}
-        </div>
-    }
-}
-
 class Lifes extends React.Component {
     render() {
         return <div className="lifes" onKeyPress={this.CreateBullet}>
@@ -128,16 +99,18 @@ class Enemys extends React.Component {
             left: -60,
             top: 60,
             ifDown: false,
-            direction: 'right'
+            direction: 'right',
+            sumScore: 0
         }
     }
 
     checkCollision = () => {
         let enemyPos;
         let bulletPos;
+        let sumScore = 0;
         const getBulletPosition = Array.from(document.getElementsByClassName('fire'));
 
-        if(this.props.shoot == true && getBulletPosition.length != 0) {
+        if( getBulletPosition.length != 0) {
             getBulletPosition.forEach((el) => {
                 bulletPos = el.getBoundingClientRect();
             });
@@ -152,7 +125,12 @@ class Enemys extends React.Component {
                     enemyPos.x + enemyPos.width > bulletPos.x &&
                     enemyPos.y < bulletPos.y + bulletPos.width &&
                     enemyPos.width + enemyPos.y > bulletPos.y) {
-
+                    console.log('Kolizja')
+                    const getScore = document.querySelector('.score span');
+                    this.setState({
+                        sumScore: this.state.sumScore += 10
+                    })
+                    getScore.innerText = this.state.sumScore;
                     el.parentNode.removeChild(el);
                     const getFire = document.querySelector('.fire');
                     getFire.parentNode.removeChild(getFire);
@@ -160,10 +138,8 @@ class Enemys extends React.Component {
                 }
             });
         }
-    }
+    };
     componentDidMount(){
-
-
         const removeID = setInterval(() =>{
             this.checkCollision()
             if(this.state.direction === 'left' && this.state.left >= -90) {
@@ -183,10 +159,10 @@ class Enemys extends React.Component {
                         left: this.state.left +10
                   });
             }
-            if(this.state.top === 120) {
+            if(this.state.top === 140) {
                 clearInterval(removeID)
             }
-        },150);
+        },500);
      }
 
     render() {
@@ -214,55 +190,62 @@ class App extends React.Component {
             marginPlayer: 250,
             posY1: 16,
             posYBullet: [],
-            shoot: false
+            shoot: false,
+            counter: 0,
+            newBullet: false
         }
     }
+
+
     handleKeyPress = (event) => {
+
         if(event.keyCode === 68){
-            if(this.state.marginPlayer === 650) {
+            if(this.state.marginPlayer === 680) {
                 this.setState({
-                    marginPlayer: this.state.marginPlayer = 650,
+                    marginPlayer: this.state.marginPlayer = 680,
+                    newBullet: false,
                 })
             } else {
                 this.setState({
                     marginPlayer: this.state.marginPlayer += 10,
+                    newBullet: false,
                 })
             }
         } else if(event.keyCode === 65){
             if(this.state.marginPlayer === 250){
                 this.setState({
                     marginPlayer: this.state.marginPlayer = 250,
+                    newBullet: false,
                 })
             } else {
                 this.setState({
                     marginPlayer: this.state.marginPlayer -= 10,
+                    newBullet: false,
                 })
             }
         } else if(event.keyCode === 32) {
-            this.intervalID = setInterval(() =>{
-                if(this.state.posY1 === 625){
-                    clearInterval(this.intervalID)
-                }else {
-                    this.setState({
-                        shoot: true,
-                        posY1: this.state.posY1 += 10,
-                    })
-                }
-            },150);
+            this.setState({
+                newBullet: true,
+                posYBullet: [...this.state.posYBullet, this.state.marginPlayer],
+                coutner: this.state.counter += 1,
+            })
         }
     };
     render() {
+        //console.log(this.state.posYBullet)
         return <div id="board" onKeyDown={this.handleKeyPress} tabIndex="0">
             <ul className="score">
-                <li className="score">SCORE-1: <span>0</span></li>
-                <li>TAITO: 0</li>
+                <li className="score">SCORE-1: <span></span></li>
             </ul>
-                <Enemys shoot={this.state.shoot}/>
+                <Enemys />
                 <Blocks/>
                 <Player
                     marginPlayer2={this.state.marginPlayer}
                     shoot={this.state.posY1}
-                    shootY={this.state.posYBullet}
+                    shootY={this.state.posYBullet[this.state.counter -1]}
+                    divsCreate={this.state.divsArray}
+                    counter={this.state.counter}
+                    newBullet={this.state.newBullet}
                 />
                 <Lifes/>
             </div>
